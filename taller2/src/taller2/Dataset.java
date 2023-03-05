@@ -1,3 +1,13 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package taller2;
+
+/**
+ *
+ * @author sebas
+ */
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
@@ -7,12 +17,10 @@ import java.awt.*;
 import java.util.Arrays;
 
 public class Dataset {
-
     private double[][] points;
     private int[] labels;
-    private int d;  // dimensionality
-    private int n;  // number of samples
-
+    private int d; // dimensionality
+    private int n; // number of samples
 
     Dataset(double[][] p, int[] l) {
         d = p[0].length;
@@ -21,11 +29,9 @@ public class Dataset {
         labels = l;
     }
 
-
     public double[] getPoint(int i) {
         return points[i];
     }
-
 
     public int getLabel(int i) {
         return labels[i];
@@ -46,11 +52,14 @@ public class Dataset {
     public static Dataset generateClusters2D(int n) {
         double[][] points = new double[n][2];
         int[] labels = new int[n];
-        for(int i=0; i<n; i++) {
+        for (int i = 0; i < n; i++) {
             double mu = 1.0;
             double sigma = 0.5;
             labels[i] = 0;
-            if (StdRandom.uniform() >= 0.5) { mu = -1.0; labels[i]=1; }
+            if (StdRandom.uniformDouble() >= 0.5) {
+                mu = -1.0;
+                labels[i] = 1;
+            }
             double x = StdRandom.gaussian(mu, sigma);
             double y = StdRandom.gaussian(mu, sigma);
             points[i][0] = x;
@@ -62,16 +71,15 @@ public class Dataset {
 
     private static double[] clusterCenter(int label) {
         String s = Integer.toBinaryString(label);
-        StdOut.println(label+" : "+s);
+        StdOut.println(label + " : " + s);
         return null;
     }
-
 
     public void plotPoints() {
         StdDraw.setXscale(-5, 5);
         StdDraw.setYscale(-5, 5);
         Color colors[] = { StdDraw.RED, StdDraw.BLUE };
-        for(int i=0; i<points.length; i++) {
+        for (int i = 0; i < points.length; i++) {
             StdDraw.setPenColor(colors[labels[i]]);
             StdDraw.setPenRadius(0.01);
             StdDraw.point(points[i][0], points[i][1]);
@@ -79,25 +87,24 @@ public class Dataset {
 
     }
 
-
     private static double[][] hypercube(int d) {
-        int n = 1<<d;
+        int n = 1 << d;
         double[][] vertices = new double[n][d];
         int[] powers = new int[d];
-        for(int i=0,j=1; i<d; i++,j<<=1) powers[i] = j;
+        for (int i = 0, j = 1; i < d; i++, j <<= 1)
+            powers[i] = j;
         // StdOut.println(Arrays.toString(powers));
-        for(int i=0; i<n; i++)
-            for(int j=0; j<d; j++)
-                vertices[i][j] = (i&powers[j])!=0 ? -1 : 1;
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < d; j++)
+                vertices[i][j] = (i & powers[j]) != 0 ? -1 : 1;
         // for(double[] a : vertices)
-        //     StdOut.println(Arrays.toString(a));
+        // StdOut.println(Arrays.toString(a));
         return vertices;
     }
 
-
     public static double[] gaussianPoint(double[] centroid, double sigma) {
         double[] point = new double[centroid.length];
-        for(int i=0; i<centroid.length; i++)
+        for (int i = 0; i < centroid.length; i++)
             point[i] = StdRandom.gaussian(centroid[i], sigma);
         return point;
     }
@@ -107,29 +114,11 @@ public class Dataset {
         int[] labels = new int[n];
         double sigma = 0.5;
         double[][] centroids = hypercube(dim);
-        for(int i=0; i<n; i++) {
-            labels[i] = StdRandom.uniform(lab);
+        for (int i = 0; i < n; i++) {
+            labels[i] = StdRandom.uniformInt(lab);
             points[i] = gaussianPoint(centroids[labels[i]], sigma);
         }
         return new Dataset(points, labels);
     }
-
-
-    public static void main(String[] args) {
-
-        int n=20;
-
-        // Generar un dataset de n puntos en 2D
-        Dataset ds1 = generateClusters2D(n);
-        ds1.plotPoints();
-
-        // Generar un dataset de n puntos en 3D
-        Dataset ds2 = generateClusters(n, 3, 8);
-        double[][] points = ds2.getPointsArray();
-        for(double[] x: points)
-            StdOut.println(Arrays.toString(x));
-
-    }
-
-
+    
 }

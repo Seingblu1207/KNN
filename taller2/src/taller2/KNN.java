@@ -1,9 +1,16 @@
-import java.util.*;
-import edu.princeton.cs.algs4.*;;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package taller2;
 
+/**
+ *
+ * @author sebas
+ */
+import java.util.*;
 
 public class KNN {
-
     public static int clasificar(double[][] conocidos, int[] clases, double[] muestra, int k) {
         // Calcular la distancia entre la muestra desconocida y todas las muestras
         // conocidas
@@ -69,10 +76,5 @@ public class KNN {
             this.distancia = distancia;
             this.clase = clase;
         }
-    }
-
-    public static void main(){
-
-    clasificar(null, null, null, 0);
     }
 }

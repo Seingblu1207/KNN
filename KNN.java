@@ -1,4 +1,6 @@
 import java.util.*;
+import edu.princeton.cs.algs4.*;;
+
 
 public class KNN {
 
@@ -67,5 +69,10 @@ public class KNN {
             this.distancia = distancia;
             this.clase = clase;
         }
+    }
+
+    public static void main(){
+
+    clasificar(null, null, null, 0);
     }
 }

@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File with Assertions Enabled",
+            "request": "launch",
+            "mainClass": "${file}",
+            "args": "-ea"
+        }
+    ]
+}

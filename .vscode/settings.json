@@ -1,6 +1,10 @@
 {
     "java.project.referencedLibraries": [
+<<<<<<< HEAD
         "lib/**/*.jar",
         "c:\\Users\\oveor\\Desktop\\TAREASSSSS\\ESTRUCTURAS\\algs4.jar"
+=======
+        "lib/**/*.jar"
+>>>>>>> 485242ad19eaf7794d9fcc05d465d63029b54c17
     ]
 }
